@@ -77,9 +77,10 @@ WriteH5ADHelper <- function(object, assay, root, global = FALSE) {
 
   if (!any(vapply(x, is.null, TRUE))) {
     # 5
-    layers_group <- root$create_group("layers")
-    slot_writer(layers_group, x[["counts"]], "counts")
-    slot_writer(layers_group, x[["data"]], "data")
+    raw <- root$create_group("raw")
+    slot_writer(raw, x[["data"]], "X")
+    var_name <- raw$create_group("var")
+    write_names(var_name, rownames(mod_object))
     slot_writer(root, x[["scale.data"]], "X")
   } else if (!is.null(x[["counts"]]) && !is.null(x[["scale.data"]])) {
     # 4
