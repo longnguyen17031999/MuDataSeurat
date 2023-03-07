@@ -26,7 +26,7 @@ WriteH5ADHelper <- function(object, assay, root, global = FALSE) {
   write_data_frame(obs_group, obs)
 
   # .var
-  var <- mod_object@meta.features
+  var <- mod_object@meta.features[VariableFeatures(mod_object), ]
   var_names <- rownames(mod_object@meta.features)
 
   # Define highly variable features, if any
